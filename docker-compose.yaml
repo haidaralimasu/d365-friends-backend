@@ -10,9 +10,17 @@ services:
     volumes:
       - static_volume:/home/app/static
       - media_volume:/home/app/media
+      - ./nginx/nginx.conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www/:/var/www/certbot/:ro
     depends_on:
       - backend
     restart: "on-failure"
+
+    certbot:
+      image: certbot/certbot:latest
+      volumes:
+        - ./certbot/www/:/var/www/certbot/:rw
+        - ./certbot/conf/:/etc/letsencrypt/:rw
 
   backend:
     build: ./
