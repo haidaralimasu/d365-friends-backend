@@ -6,6 +6,7 @@ from django.template.defaultfilters import slugify
 class BlogPost(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField()
+    tags = models.CharField(max_length=150)
 
     thumbnail = models.ImageField(upload_to="photos/")
     excerpt = models.CharField(max_length=150)
